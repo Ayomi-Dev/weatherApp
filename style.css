@@ -15,28 +15,15 @@ body{
 .container{
     width: 100%;
     margin:0 auto;
-    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
-    /* background-attachment: fixed;
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(bk.jpeg);
+    background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat; */
+    background-repeat: no-repeat;
     min-height: 100vh;
     position: absolute;
     overflow: hidden;
 }
-.underlay{
-    min-height: 100vh; 
-    width: 100%;
-    margin:0 auto;
-    position: absolute;
-}
-.underlay img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-}
-
 .search{
     position: relative;
     width: 100%;
@@ -83,14 +70,13 @@ body{
     backdrop-filter: blur(2px);
 }
 .general{
-    width: 100%;
+    width: 97%;
     margin:0 auto;
     opacity: 0;
     visibility: hidden;
     transform: scale(1.18);
     transition: opacity 200ms ease-in-out 0ms, transform 200ms ease-in-out 0ms,
     visibility 200ms ease-in-out 0ms ;
-   
 }
 .general.active{
     opacity: 1;
@@ -115,6 +101,9 @@ body{
     font-weight: 600;
     margin: 10px 0;
     text-align: center;
+}
+.city-name .range p{
+    font-size: .8rem;
 }
 .temp{
     margin-top: 10px;
@@ -189,7 +178,7 @@ body{
 }
 .day p{
     opacity: .8;
-    FONT-WEIGHT: 700;
+    font-size: .8rem;
 }
 .day h3{
     opacity: .5;
@@ -364,7 +353,7 @@ body{
     .daily_temp .fa{
         display: none;
     }
-    .range p{
+    .range p, .city-name .range p{
         font-size: .8rem;
     }
     .day:hover .temp h2{

@@ -6,6 +6,7 @@ let weatherObj = {
         .then(response => response.json())
 
         .then(data => {
+            console.log(data)
             this.displayWeather(data);
             document.querySelector('.general').classList.add('active');
             document.querySelector('.intro').classList.add('active');
@@ -25,7 +26,7 @@ let weatherObj = {
         const {temp, temp_min, temp_max, pressure, humidity} = weatherInfo.main;
         const {speed} = weatherInfo.wind;
         const {lon, lat} = weatherInfo.coord;
-        const {country} = weatherInfo.sys;
+        const {country, sunrise, sunset} = weatherInfo.sys;
         const {all} = weatherInfo.clouds
 
 
@@ -45,17 +46,39 @@ let weatherObj = {
         const daysOfTheWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]
         const currentDayOfWeek = daysOfTheWeek[currentDay] //getting name of current day
         
-        
+        //calculating sunrise
+        const utcSunrise = (sunrise + 3600) * 1000
+
+        const sunriseDate = new Date(utcSunrise).toUTCString();
+        const currentSunriseTime = new Date(sunriseDate)
+        currentSunriseTime.setUTCHours(currentSunriseTime.getUTCHours() - 1)
+
+        const sunriseTime = currentSunriseTime.toLocaleTimeString();
+
+
+        //calculating sunset time
+        const utcSunset = (sunset + 3600) * 1000;
+
+        const sunsetDate = new Date(utcSunset).toUTCString();
+        const currentSunsetTime = new Date(sunsetDate);
+        currentSunsetTime.setUTCHours(currentSunsetTime.getUTCHours() - 1);
+
+        const sunsetTime = currentSunsetTime.toLocaleTimeString();
+
+
         
         document.querySelector('.col1').innerHTML = `<div class="city-name">
-                
                 <p>${name}, <span style="opacity: .8;">${country}.</span></p>
+                <div class="range">
+                    <p>Sunrise: ${sunriseTime}</span></p>
+                    <p>Sunset: ${sunsetTime}</span></p>
+                </div>
             </div>
             <div class="temp">
                 <h2>${temp}&deg C</h2>
                 <div class="range">
-                    <p>Low:<span>${temp_min}&degC</span></p>
-                    <p>High:<span>${temp_max}&degC</span></p>
+                    <p>Low:<span> ${temp_min}&degC</span></p>
+                    <p>High:<span> ${temp_max}&degC</span></p>
                 </div>
             </div>`
 
