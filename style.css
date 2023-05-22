@@ -14,12 +14,11 @@ body{
 }   
 .container{
     width: 100%;
-    margin:0 auto;
-    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(bk.jpeg);
+    margin: 0 auto;
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url(background.jpg);
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
     min-height: 100vh;
     position: absolute;
     overflow: hidden;
@@ -87,7 +86,6 @@ body{
 }
 .icon img{
     font-size: 3rem;
-    /* font-weight: 800; */
     margin-bottom: 10px;
 }
 .city-name{
@@ -104,6 +102,7 @@ body{
 }
 .city-name .range p{
     font-size: .8rem;
+    font-weight: 300;
 }
 .temp{
     margin-top: 10px;
@@ -125,6 +124,9 @@ body{
 }
 .main{
     margin: 20px 0;
+}
+.main h3{
+    font-size: 1.4rem;
 }
 .col2 p, .col3 p{
     opacity: .8;
@@ -155,7 +157,6 @@ body{
 .btnRight{
     right: 0;
 }
-
 .week{
     max-width: 95%;
     display: flex;
@@ -174,7 +175,7 @@ body{
     border-radius: 10px;
     transition: .3s;
     text-align: center;
-    border: 1px solid rgba(0,0,0,0.5);
+    border: 2px solid rgba(0,0,0,0.8);
 }
 .day p{
     opacity: .8;
@@ -192,8 +193,7 @@ body{
 .day .temp h2{
     text-align: center;
     margin-top: 30px;
-    /* margin-left: 20px; */
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .day:hover{
     background: rgba(0,0,0,0.2);
@@ -293,6 +293,7 @@ body{
     }
     .col1{
         justify-content: space-around;
+        align-items: center;
         flex-direction: row-reverse;
     }
     .col2{
@@ -301,9 +302,9 @@ body{
         align-items: center;
     }
     .temp h2{
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        margin-bottom: 0;
+        margin-bottom: 5px;
     }
     .range p, .range span{
         margin: 0;
@@ -311,6 +312,7 @@ body{
     }
     .city-name p{
         font-size: 1.2rem;
+        margin: 0;
     }
     .cloud{
         text-align: center;
@@ -353,8 +355,14 @@ body{
     .daily_temp .fa{
         display: none;
     }
-    .range p, .city-name .range p{
-        font-size: .8rem;
+    .city-name{
+        margin-top: 0;
+    }
+    .city-name .range{
+        margin-top: 5px;
+    }
+    .city-name .range p{
+        font-size: .7rem;
     }
     .day:hover .temp h2{
         font-size: 1.2rem;

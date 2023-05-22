@@ -6,7 +6,6 @@ let weatherObj = {
         .then(response => response.json())
 
         .then(data => {
-            console.log(data)
             this.displayWeather(data);
             document.querySelector('.general').classList.add('active');
             document.querySelector('.intro').classList.add('active');
@@ -21,6 +20,7 @@ let weatherObj = {
     },
     displayWeather: function(weatherInfo) {
         
+        //desctructuring properties of data object resolved
         const {icon, main, description} = weatherInfo.weather[0];
         const {name} = weatherInfo;
         const {temp, temp_min, temp_max, pressure, humidity} = weatherInfo.main;
@@ -30,7 +30,7 @@ let weatherObj = {
         const {all} = weatherInfo.clouds
 
 
-
+        //calculating city time and date
         const utcSec = parseInt(weatherInfo.dt, 10) + parseInt(weatherInfo.timezone, 10) //converting dt and timezone values to integers
         const utcMilSec = (utcSec * 1000) //converting to milliseconds
 
@@ -46,24 +46,24 @@ let weatherObj = {
         const daysOfTheWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]
         const currentDayOfWeek = daysOfTheWeek[currentDay] //getting name of current day
         
-        //calculating sunrise
+        //calculating sunrise time
         const utcSunrise = (sunrise + 3600) * 1000
 
         const sunriseDate = new Date(utcSunrise).toUTCString();
-        const currentSunriseTime = new Date(sunriseDate)
-        currentSunriseTime.setUTCHours(currentSunriseTime.getUTCHours() - 1)
+        const citySunriseTime = new Date(sunriseDate)
+        citySunriseTime.setUTCHours(citySunriseTime.getUTCHours() - 1)
 
-        const sunriseTime = currentSunriseTime.toLocaleTimeString();
+        const sunriseTime = citySunriseTime.toLocaleTimeString();
 
 
         //calculating sunset time
         const utcSunset = (sunset + 3600) * 1000;
 
         const sunsetDate = new Date(utcSunset).toUTCString();
-        const currentSunsetTime = new Date(sunsetDate);
-        currentSunsetTime.setUTCHours(currentSunsetTime.getUTCHours() - 1);
+        const citySunsetTime = new Date(sunsetDate);
+        citySunsetTime.setUTCHours(citySunsetTime.getUTCHours() - 1);
 
-        const sunsetTime = currentSunsetTime.toLocaleTimeString();
+        const sunsetTime = citySunsetTime.toLocaleTimeString();
 
 
         
@@ -190,6 +190,11 @@ searchBtn.addEventListener('click', () => {
     weatherObj.search();
 })
 
+const searchBar = document.querySelector('.searchBar');
+searchBar.addEventListener('change', () => {
+    weatherObj.search();
+})
+
 
 const date = new Date();
 const day = date.getDay();
@@ -226,6 +231,16 @@ days.forEach((day) => {
         document.querySelector('.week .active').classList.remove('active');
         day.classList.add('active');
     })
+})
+
+//scroll function for arrow buttons
+
+document.querySelector('.btnLeft').addEventListener('click', () => {
+    document.querySelector('.week').scrollLeft -= 150
+})
+
+document.querySelector('.btnRight').addEventListener('click', () => {
+    document.querySelector('.week').scrollLeft += 150
 })
     
 
