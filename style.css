@@ -109,7 +109,7 @@ body{
     margin-top: 10px;
 }
 .temp h2{
-    font-size: 2.7rem;
+    font-size: 2.2rem;
     font-weight: 900;
     margin-bottom: 30px;
 }
@@ -133,7 +133,7 @@ body{
     margin-right: 15px;
 }
 .value{
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 .daily_temp{
     width: 95%;
@@ -303,7 +303,7 @@ body{
     .temp h2{
         font-size: 1.3rem;
         font-weight: 700;
-        margin-left: -10px;
+        margin-bottom: 0;
     }
     .range p, .range span{
         margin: 0;
