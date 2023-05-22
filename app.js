@@ -168,15 +168,18 @@ searchBtn.addEventListener('click', () => {
 })
 
 
-
-
-
+const date = new Date();
+const day = date.getDay();
+    const daysOfWeek = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"]
+    const currentDayOfWeek = daysOfWeek[day]
+    document.querySelector('.today').innerHTML = `<h1>${currentDayOfWeek}</h1>`
+    const dayOfWeek = date.toLocaleDateString();
+    document.querySelector('.dates').innerHTML = `<h2>${dayOfWeek}</h2>`
 setInterval(() => {
     const date = new Date();
     const timeOfDay = date.toLocaleTimeString();
     document.querySelector('.times').innerHTML = `<h2>${timeOfDay}</h2>`
-    const dayOfWeek = date.toLocaleDateString();
-    document.querySelector('.dates').innerHTML = `<h2>${dayOfWeek}</h2>`
+    
 
 }, 1000);
 
