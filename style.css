@@ -15,13 +15,26 @@ body{
 .container{
     width: 100%;
     margin:0 auto;
-    background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(bk.jpeg);
-    background-attachment: fixed;
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
+    /* background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
     min-height: 100vh;
+    position: absolute;
     overflow: hidden;
+}
+.underlay{
+    min-height: 100vh; 
+    width: 100%;
+    margin:0 auto;
+    position: absolute;
+}
+.underlay img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
 }
 
 .search{

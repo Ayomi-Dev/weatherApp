@@ -148,7 +148,7 @@ let weatherObj = {
              <h3>Real feels</h3>
              <span>${feels_like}&deg</span>
          </div>`
-        });
+        }).join('');
         
     },
 
