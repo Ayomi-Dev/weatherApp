@@ -1,10 +1,11 @@
 const weatherObj = {
     apiKey: "325ae071e5b172e526ea622fdf06ca9d",
+
     getWeather: async function (city) {
         document.querySelector('.loading-msg').innerText = "Loading..."
         await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${this.apiKey}`)
 
-        .then(response =>  response.json() )
+        .then(response => response.json())
 
         .then(data => {
             this.displayWeather(data);
@@ -12,8 +13,8 @@ const weatherObj = {
             document.querySelector('.intro').classList.add('active');
         })
         .catch(err => {
-            console.log(err)
-            document.querySelector('.error').innerText = "City Not Found, Please Enter Correct City Name";
+            // console.log(err)
+            document.querySelector('.error').innerText = "City Not Found, Please Enter A Correct City Name.";
             setTimeout(() => {
                 document.querySelector('.error').innerText  = ""
             }, 5000)
@@ -143,6 +144,9 @@ const weatherObj = {
 
         .then(data => {
             this.displayForecast(data);
+
+            document.querySelector('.error').innerText = ''
+            document.querySelector('.load .fa-rotate-right').classList.add('active');
         })
     },
 
@@ -176,67 +180,61 @@ const weatherObj = {
              <h3>Real feels</h3>
              <span>${feels_like}&deg</span>
          </div>`
-        }).join('');
-        
+        }).join(''); 
     },
 
 
-
-
-    search: function() {
-        this.getForecast(document.querySelector('.searchBar').value)
-        this.getWeather(document.querySelector('.searchBar').value)
+    search: function(searchValue) {
+        
+        if(searchValue === ""){
+            document.querySelector('.error').innerText = 'Please enter a city'
+            
+            setTimeout(() => {
+                document.querySelector('.error').innerText = ''
+            }, 3000);
+            return;
+        }
+        else{
+            this.getForecast(document.querySelector('.searchBar').value)
+           this.getWeather(document.querySelector('.searchBar').value)
+        }
+        
     }
 }
-
- 
-let searchBtn = document.querySelector('.fa-search')
-searchBtn.addEventListener('click', () => {
-    weatherObj.search();
-})
-
 const searchBar = document.querySelector('.searchBar');
-searchBar.addEventListener('change', () => {
-    weatherObj.search();
+const refreshBtn = document.querySelector('.refresh');
+const searchBtn = document.querySelector('.fa-search')
+
+//search icon function
+searchBtn.addEventListener('click', () => {
+    weatherObj.search(searchBar.value);
 })
 
+//refresh icon function
+refreshBtn.addEventListener('click', () => {
+    weatherObj.search(searchBar.value);
+})
 
+//enter key function
+searchBar.addEventListener('change', () => {
+    weatherObj.search(searchBar.value);
+})
+
+//displaying local date and time on start up page
 const date = new Date();
 const day = date.getDay();
-    const daysOfWeek = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"]
-    const currentDayOfWeek = daysOfWeek[day]
-    document.querySelector('.today').innerHTML = `<h1>${currentDayOfWeek}</h1>`
-    const dayOfWeek = date.toLocaleDateString();
-    document.querySelector('.dates').innerHTML = `<h2>${dayOfWeek}</h2>`
+const daysOfWeek = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"]
+const currentDayOfWeek = daysOfWeek[day]
+document.querySelector('.today').innerHTML = `<h1>${currentDayOfWeek}</h1>`
+const dayOfWeek = date.toLocaleDateString();
+document.querySelector('.dates').innerHTML = `<h2>${dayOfWeek}</h2>`
+
 setInterval(() => {
     const date = new Date();
     const timeOfDay = date.toLocaleTimeString();
     document.querySelector('.times').innerHTML = `<h2>${timeOfDay}</h2>`
-    
-
 }, 1000);
 
-ScrollReveal({
-    // reset: true,
-    distance: '80px',
-    duration: 2500,
-    delay: 200,
-    speed: 800
-  });
-  ScrollReveal().reveal('.texts p', { delay: 800, origin: 'bottom' });
-  ScrollReveal().reveal('.texts h1', { delay: 600, origin: 'bottom' });
-  ScrollReveal().reveal('.fa-solid', { delay: 400, origin: 'top' });
-  ScrollReveal().reveal('.texts h2', { delay: 700, origin: 'bottom' });
-
-
-let days = document.querySelectorAll('.day');
-
-days.forEach((day) => {
-    day.addEventListener('click', ()=>{
-        document.querySelector('.week .active').classList.remove('active');
-        day.classList.add('active');
-    })
-})
 
 //scroll function for arrow buttons
 
@@ -247,7 +245,19 @@ document.querySelector('.btnLeft').addEventListener('click', () => {
 document.querySelector('.btnRight').addEventListener('click', () => {
     document.querySelector('.week').scrollLeft += 150
 })
-    
+ 
+
+ScrollReveal({
+    // reset: true,
+    distance: '80px',
+    duration: 2500,
+    delay: 200,
+    speed: 800
+  });
+  ScrollReveal().reveal('.texts p', { delay: 800, origin: 'bottom' });
+  ScrollReveal().reveal('.texts h1', { delay: 600, origin: 'bottom' });
+  ScrollReveal().reveal('.fa-poo-storm', { delay: 400, origin: 'top' });
+  ScrollReveal().reveal('.texts h2', { delay: 700, origin: 'bottom' });
 
 
 
