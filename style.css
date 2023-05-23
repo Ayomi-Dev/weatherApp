@@ -250,7 +250,7 @@ body{
     transform: translateY(-70px);
     opacity: .8;
 }
-.error{
+.error, .loading-msg{
     position: absolute;
     top: 100%;
     text-align: center;

@@ -1,9 +1,10 @@
-let weatherObj = {
+const weatherObj = {
     apiKey: "325ae071e5b172e526ea622fdf06ca9d",
-    getWeather: function (city) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${this.apiKey}`)
+    getWeather: async function (city) {
+        document.querySelector('.loading-msg').innerText = "Loading..."
+        await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${this.apiKey}`)
 
-        .then(response => response.json())
+        .then(response =>  response.json() )
 
         .then(data => {
             this.displayWeather(data);
@@ -11,10 +12,15 @@ let weatherObj = {
             document.querySelector('.intro').classList.add('active');
         })
         .catch(err => {
-            document.querySelector('.error').innerText = 'City Not Found, Please Enter Correct City Name';
+            console.log(err)
+            document.querySelector('.error').innerText = "City Not Found, Please Enter Correct City Name";
             setTimeout(() => {
-                document.querySelector('.error').innerText = "";
+                document.querySelector('.error').innerText  = ""
             }, 5000)
+        })
+
+        .finally(() => {
+            document.querySelector('.loading-msg').innerText = ""
         })
         
     },
@@ -130,8 +136,8 @@ let weatherObj = {
 
 
 
-    getForecast:    function(cityName) {
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${this.apiKey}`)
+    getForecast: async function(cityName) {
+        await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${this.apiKey}`)
 
         .then(response => response.json())
 
@@ -143,7 +149,6 @@ let weatherObj = {
 
     displayForecast: function (forecastInfo) {
         const forecast = forecastInfo.list
-        // console.log(forecast);
     
         document.querySelector('.week').innerHTML = forecast.map((info) => {
             const {dt} = info
@@ -166,7 +171,7 @@ let weatherObj = {
             <p>${currentDate}</p> 
             <p>${currentTime}</p> 
             <div class="temp">
-                 <h2>${temp}&deg C</h2>
+                 <h2>${temp}&deg</h2>
              </div>
              <h3>Real feels</h3>
              <span>${feels_like}&deg</span>
